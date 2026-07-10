@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang = "en-US">
+	<head>
+		<title>Gwent v3.5</title>
+		<meta charset = "utf-8" />
+		<meta name = "author" content = "Sundaram, Costa, Sylver & Iván Mtz" />
+		<meta name = "description" content = "Play the original Gwent minigame from The Witcher 3 in your browser! Includes cards from Hearts of Stone and Blood & Wine!" />
+		<meta name = "keywords" content = "arun, sundaram, reynolds, costa, randompianist, sylver, romain, durban, programmer, gwent, tw3, witcher, card, game, gamedev, play" />
+		<meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
+		<link rel = "icon" type = "image/x-icon" href = "images/favicon.ico" />
+		<link rel = "stylesheet" type = "text/css" href = "css/style.css" />
+		<style type = "text/css" id = "pLoad"></style>
+	
+<style type = "text/css">        
+@font-face {
+            font-family: 'GwentCustom';
+            src: url('fonts/gwent.ttf') format('truetype'); 
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .gwent-title {
+            font-family: 'GwentCustom', serif;
+            font-size: 6rem;                 
+            letter-spacing: -8px;             
+            display: block;                  
+            text-align: center;              
+        
+      background: linear-gradient(to bottom, 
+        #b58f00 0%,   
+        #e0b400 35%,  
+        #8a6000 65%,  
+        #9c7a00 100%  
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #000000;
+
+    filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.95)) 
+            drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.75)) brightness(1.0) contrast(1.2);
+}
+.letra-grande {
+        font-size: 140%; 
+        vertical-align: middle; 
+    }
+    </style>
+</head>
+	<body>
+		<div class = "abs" id = "very_start_bg1"></div>
+		<div class = "abs" id = "very_start_gradient"></div>
+		<div class = "abs" id = "very_start_bg2">
+			<div id = "very_start" class = "abs" style = "padding-top:55%">
+<span class="gwent-title">
+                <span class="letra-grande">G</span>WEN<span class="letra-grande">T</span>
+            </span>
+<br />
+				<font id = "load_text">Loading v3.5...</font>
+				<button class = "start-game_class" id = "button_start" style = "display:none">LET'S PLAY</button>
+<div id = "version_text" style = "font-family: 'GwentCustom', serif; font-size: 1.2rem; color: black; text-align: center; margin-top: 10px;">v3.5</div>
+			</div>
+		</div>
+		<div id = "dimensions"></div>
+		<main style = "display:none">
+			<section id = "click-background" class = "noclick"></section>
+			<section id = "panel-left" class = "panel">
+				<div id = "leader-op" class = "leader-box">
+					<div class = "leader-container center"></div>
+					<div class = "leader-active">
+						<div></div>
+					</div>
+				</div>
+				<section id = "stats-op" class = "stats">
+					<div id = "faction-ability-op" class = "faction-ability">
+						<div id = "faction-ability-count-op" class = "faction-ability-count">0</div>
+					</div>
+					<div class = "profile-img">
+						<div>
+							<div></div>
+						</div>
+					</div>
+					<div id = "name-op" class = "name">Opponent</div>
+					<div id = "deck-name-op" class = "deck-name"></div>
+					<div id = "hand-count-op" class = "hand-count">6</div>
+					<div id = "gem1-op" class = "gem gem-on bg-contain"></div>
+					<div id = "gem2-op" class = "gem gem-on bg-contain"></div>
+					<div id = "score-total-op" class = "score-total">
+						<div class = "center">0</div>
+					</div>
+					<div id = "passed-op">Passed</div>
+				</section>
+				<div id = "weather" class = "card-container"></div>
+				<section id = "stats-me" class = "stats">
+					<div id = "faction-ability-me" class = "faction-ability">
+						<div id = "faction-ability-count-me" class = "faction-ability-count">0</div>
+					</div>
+					<div class = "profile-img">
+						<div>
+							<div></div>
+						</div>
+					</div>
+					<div id = "passed-me">Passed</div>
+					<div id = "hand-count-me" class = "hand-count">5</div>
+					<div id = "gem1-me" class = "gem gem-on bg-contain"></div>
+					<div id = "gem2-me" class = "gem gem-on bg-contain"></div>
+					<div id = "name-me" class = "name"></div>
+					<div id = "deck-name-me" class = "deck-name"></div>
+					<div id = "score-total-me" class = "score-total">
+						<div class = "center">0</div>
+					</div>
+				</section>
+				<div id = "leader-me" class = "leader-box">
+					<div class = "leader-container center"></div>
+					<div class = "leader-active">
+						<div></div>
+					</div>
+				</div>
+				<div id = "pass-button" class = "center botao-campo">Pass</div>
+				<div id = "giveup-button" class = "center botao-campo">Give up</div>
+			</section>
+			<section id = "panel-mid" class = "panel">
+				<section id = "field-op" class = "field">
+					<div class = "field-row">
+						<div class = "row-score center">0</div>
+						<div class = "row-special cardpile"></div>
+						<div id = "f1" class = "row-cards card-container"></div>
+						<div class = "row-weather"></div>
+					</div>
+					<div class = "field-row">
+						<div class = "row-score center">0</div>
+						<div class = "row-special cardpile"></div>
+						<div id = "f2" class = "row-cards card-container"></div>
+						<div class = "row-weather"></div>
+					</div>
+					<div class = "field-row">
+						<div class = "row-score center">0</div>
+						<div class = "row-special cardpile"></div>
+						<div id = "f3" class = "row-cards card-container"></div>
+						<div class = "row-weather"></div>
+					</div>
+				</section>
+				<section id = "field-me" class = "field">
+					<div class = "field-row">
+						<div class = "row-score center">0</div>
+						<div class = "row-special cardpile"></div>
+						<div id = "f4" class = "row-cards card-container"></div>
+						<div class = "row-weather"></div>
+					</div>
+					<div class = "field-row">
+						<div class = "row-score center">0</div>
+						<div class = "row-special cardpile"></div>
+						<div id = "f5" class = "row-cards card-container"></div>
+						<div class = "row-weather"></div>
+					</div>
+					<div class = "field-row">
+						<div class = "row-score center">0</div>
+						<div class = "row-special cardpile"></div>
+						<div id = "f6" class = "row-cards card-container"></div>
+						<div class = "row-weather"></div>
+					</div>
+				</section>
+				<section id = "field-hand">
+					<div id = "hand-row" class = "card-container card-selectable"></div>
+					<div id = "op-hand-row" class = "card-container card-selectable"></div>
+				</section>
+			</section>
+			<section id = "panel-right" class = "panel">
+				<div id = "grave-op" class = "cardpile"></div>
+				<div id = "deck-op" class = "cardpile"></div>
+				<div id = "grave-me" class = "cardpile"></div>
+				<div id = "deck-me" class = "cardpile"></div>
+			</section>
+			<div id = "hand-op"></div>
+			<section class = "card-preview hide">
+				<div class = "card-lg" id = "no_hover"></div>
+				<div class = "card-description">
+					<div></div>
+					<h1></h1>
+					<p></p>
+				</div>
+			</section>
+			<section id = "carousel" class = "hide">
+				<div>
+					<div class = "card-lg" onclick = "Carousel.curr.shift(event,-2)"></div>
+					<div class = "card-lg" onclick = "Carousel.curr.shift(event,-1)"></div>
+					<div class = "card-lg" onclick = "Carousel.curr.select(event)" id = "no_sound"></div>
+					<div class = "card-lg" onclick = "Carousel.curr.shift(event,1)"></div>
+					<div class = "card-lg" onclick = "Carousel.curr.shift(event,2)"></div>
+				</div>
+				<div class = "card-description">
+					<div></div>
+					<h1></h1>
+					<p></p>
+				</div>
+				<div id = "carousel_label"></div>
+			</section>
+			<section id = "popup" class = "center hide">
+				<div>
+					<h3></h3>
+					<p></p>
+					<div>
+						<button class = "hover_un" onclick = "Popup.curr.selectYes()"></button>
+						<button class = "hover_un" onclick = "Popup.curr.selectNo()"></button>
+					</div>
+				</div>
+			</section>
+			<section id = "notification-bar" class = "hide">
+				<div></div>
+			</section>
+			<section id = "end-screen" class = "hide">
+				<div></div>
+				<table>
+					<colgroup>
+						<col span = "3" />
+						<col span = "1" />
+						<col span = "1" />
+						<col span = "1" />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th colspan = "2"></th>
+							<th>Round 1</th>
+							<th>Round 2</th>
+							<th>Round 3</th>
+						</tr>
+						<tr>
+							<th colspan = "2">You</th>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th colspan = "2">Opponent</th>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class = "hide">The battle cannot end in a draw. You can play a rematch using the same decks or surrender.</p>
+				<div class = "end-screen-buttons">
+					<button>Customize</button>
+					<button>Replay</button>
+					<button onclick = "showStats(true)">Statistics</button>
+				</div>
+			</section>
+			<section id = "deck-selector"></section>
+		</main>
+		<section id = "deck-customization" style = "display:none">
+			<div id = "faction-title" class = "center">
+				<h1></h1>
+			</div>
+			<div class = "links" id = "stats">
+				<a href = "javascript:showStats(false);">Statistics</a>
+			</div>
+			<div class = "links" id = "site-links">
+				<a href = "rules.html" target = "_blank">Rules of Gwent</a>
+			</div>
+			<p id = "faction-description"></p>
+			<a id = "select-deck" class = "deck-options">Select Own Deck</a>
+			<label id = "upload-deck" class = "deck-options">
+				<input type = "file" id = "add-file" value = "Import" style = "display:none;" />
+				Upload Deck
+			</label>
+			<a id = "change-faction" class = "deck-options">Change Faction</a>
+			<a id = "download-deck" class = "deck-options">Download Deck</a>
+			<a id = "download-json" style = "display:none;"></a>
+			<a id = "select-op-deck" class = "deck-options">Select Opponent Deck ></a>
+			<span id = "op-deck-name" class = "deck-options">Random deck</span>
+			<h2 id = "card-bank-title" class = "card-contianer-title">Card Collection</h2>
+			<h2 id = "card-deck-title" class = "card-contianer-title">Cards in Deck</h2>
+			<div id = "card-bank" class = "card-array"></div>
+			<div id = "card-deck" class = "card-array"></div>
+			<div id = "card-leader">
+				<p>Leader</p>
+				<div></div>
+			</div>
+			<div id = "deck-stats">
+				<p>Total cards in deck</p>
+				<p>0</p>
+				<p>Number of Unit Cards</p>
+				<p>0</p>
+				<p>Special Cards</p>
+				<p>0/10</p>
+				<p>Total Unit Card Strength</p>
+				<p>0</p>
+				<p>Hero Cards</p>
+				<p>0</p>
+			</div>
+			<button id = "start-game" class = "start-game_class">Start game</button>
+			<button id = "start-ai-game" class = "start-game_class">Start AI game</button>
+		</section>
+		<div id="toggle-music" class="center music-customization" style="display:none; cursor:default !important; display: flex; gap: 8px; align-items: center;">
+    <span id="btn-play" style="cursor:pointer; font-size: 0.8em;">♫</span>
+    <span id="btn-skip" style="cursor:pointer; font-size: 0.6em;">⏭</span>
+</div>
+		
+		<script type = "text/javascript" language = "JavaScript" src = "javascript/cards.js"></script>
+		<script type = "text/javascript" language = "JavaScript" src = "javascript/decks.js"></script>
+		<script type = "text/javascript" language = "JavaScript" src = "javascript/abilities.js"></script>
+		<script type = "text/javascript" language = "JavaScript" src = "javascript/factions.js"></script>
+		<script type = "text/javascript" language = "JavaScript" src = "javascript/gwent.js"></script>
+
+<audio id="bgMusicLocal"></audio>
+
+<script>
+    var playlist = [
+        "audio/track1.mp3", "audio/track2.mp3", "audio/track3.mp3", "audio/track4.mp3",
+        "audio/track5.mp3", "audio/track6.mp3", "audio/track7.mp3", "audio/track8.mp3",
+        "audio/track9.mp3", "audio/track10.mp3", "audio/track11.mp3", "audio/track12.mp3", "audio/track13.mp3"
+    ];
+    var audio = document.getElementById('bgMusicLocal');
+
+   var currentTrackIndex = -1;
+
+    function saltar() {
+        if (playlist.length <= 1) {
+            if (playlist.length === 1) {
+                audio.src = playlist[0];
+                audio.play().catch(e => console.log("Esperando toque..."));
+            }
+            return;
+        }
+
+        var nuevoIndex = currentTrackIndex;
+
+        while (nuevoIndex === currentTrackIndex) {
+            nuevoIndex = Math.floor(Math.random() * playlist.length);
+        }
+        
+        currentTrackIndex = nuevoIndex;
+        var track = playlist[currentTrackIndex];
+        
+        audio.src = track;
+        audio.play().catch(e => console.log("Esperando toque..."));
+    }
+
+    // Lógica del botón Play/Pausa (♫)
+    document.getElementById('btn-play').onclick = function(e) {
+        e.stopPropagation();
+        if (!audio.src || audio.src === "") { saltar(); } 
+        else { (audio.paused) ? audio.play() : audio.pause(); }
+    };
+
+    // Lógica del botón Siguiente (⏭) - Ahora garantiza una pista totalmente nueva
+    document.getElementById('btn-skip').onclick = function(e) {
+        e.stopPropagation();
+        saltar();
+    };
+
+    // Al finalizar de forma natural, pasará a otra canción al azar
+    audio.onended = function() { saltar(); };
+   
+    function iniciarAlTocar() {
+        if (!audio.src || audio.src === "") { saltar(); }
+        window.removeEventListener('click', iniciarAlTocar);
+        window.removeEventListener('touchstart', iniciarAlTocar);
+    }
+    window.addEventListener('click', iniciarAlTocar);
+    window.addEventListener('touchstart', iniciarAlTocar);
+</script>
+
+
+	</body>
+</html>
