@@ -1,31 +1,16 @@
-# gwent-classic-v3.5
-![cover](https://user-images.githubusercontent.com/26311830/116256903-f1599b00-a7b6-11eb-84a1-16dcb5c9bfc6.jpg)
-
-This project is a modified version based on RandomPianist's fork of Gwent Classic.. 
-A browser remake of the original Gwent minigame from The Witcher 3: Wild Hunt including all cards from the DLC.<br/>Click [here](https://randompianist.github.io/gwent-classic-v3.1/) to play.
-
-In addition to cloning the original game, various cards, faction, abilities and features have added to push the game even further.
+# Gwent-classic-v3.5
+A browser remake of the original Gwent minigame from The Witcher 3: Wild Hunt including all cards from the DLC.<br/>Click [here](https://ia2904.github.io/gwent-classic-v3.5/) to play. In addition to cloning the original game, various cards, faction, abilities and features have added to push the game even further.
+This project is a modified version based on RandomPianist's fork of Gwent Classic.
+## Screenshots
+<img width="48%" alt="gameplay 1" src="https://github.com/user-attachments/assets/7d6b0fb5-1501-422d-97a6-44e4649736b3" /> <img width="48%" alt="gameplay 2" src="https://github.com/user-attachments/assets/8c332df2-d489-4fe8-9142-e4e06a89d931" />
 
 ## Improvements:
 
 Are listed here only the modifications done in this present fork, more were done before by other developers.
 
-### Adds
+Fixed several bugs, added visual effects for Hero cards and the "Clear Weather" effect. Replaced YouTube with a local music system, added a skip track button (shuffled) and new styles, changed the initial background image and text, and improved card borders.
 
-- Favicon
-- A statistics table
-- A "Give up" button
-- New visuals for carousel
-- Better styles on warning messages
-
-### Corrects
-
-- Typo errors
-- Unusued code
-- Aesthetic values
-- Bug in leader use
-- Bug when drawing a match
-- Bug when redrawing cards at the start of each match
+Additionally, implemented device vibration to enhance the gameplay experience when playing on phones, and included the Android APK build in the Releases section.
 
 ## Operations included with the keyboard:
 
