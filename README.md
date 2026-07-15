@@ -9,8 +9,7 @@ This project is a modified version based on RandomPianist's fork of Gwent Classi
 Are listed here only the modifications done in this present fork, more were done before by other developers.
 
 Fixed several bugs, added visual effects for Hero cards and the "Clear Weather" effect. Replaced YouTube with a local music system, added a skip track button (shuffled) and new styles, changed the initial background image and text, and improved card borders.
-
-Additionally, implemented device vibration to enhance the gameplay experience when playing on phones, and included the Android APK build in the Releases section.
+Adapted the game visual styles and implemented device vibration for a fully responsive mobile experience. Additionally, the Android APK build has been included in the Releases section.
 
 ## Operations included with the keyboard:
 
