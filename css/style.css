@@ -16,10 +16,15 @@
 
 .card,
 .deck-card,
-#carousel .card-lg,
-#carousel .faction {
+#carousel .card-lg {
 	position:relative;
 	display:inline-block
+}
+
+#carousel .faction {
+	position:relative;
+	display:inline-block;
+background-size: cover !important;
 }
 
 .cardpile .deck-card,
@@ -83,7 +88,7 @@
 	left:0;
 	height:5vw;
 	color:#000;
-	font-size:.9vw;
+	font-size:.8vw;
 	background-position:left
 }
 
@@ -313,8 +318,8 @@ background-size: cover;
 	width:2vw;
 	font-size:3vw;
 	color: #FFB800;
- -webkit-text-stroke: 0.6px black;
-	text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+ -webkit-text-stroke: 0.1px black;
+	text-shadow: 2px 2px 5px #4c390a;
 }
 
 .music-customization {
@@ -844,7 +849,7 @@ background-size: cover;
 }
 
 .botao-campo {
-	left:63%;
+	left:59%;
 	width:20%;
 	height:4%;
 	font-size:1.5vw;
@@ -1145,6 +1150,7 @@ background-size: cover;
 	border-radius:1.5vw
 }
 
+
 .card-lg:hover {
 	border:.1vw solid goldenrod;
 	box-shadow:0 0 1vw goldenrod
@@ -1192,7 +1198,7 @@ background-size: cover;
 }
 
 .card-array .card-lg .card-large-quote {
-	top:83%;
+	top:82%;
 	width:98%;
 	font-size:.7vw
 }
@@ -1318,6 +1324,7 @@ background-size: cover;
 	height:11vw;
 	border:.1vw solid #ffffff57;
 	border-width:.1vw 0;
+border-radius: 0.5vw;
 	background-color:rgba(20, 20, 20, .95)
 }
 
@@ -1913,6 +1920,7 @@ body,
 	background-position:top
 }
 
+
 .score-total,
 .faction-ability,
 .profile-img,
@@ -2008,7 +2016,7 @@ main,
 #popup button,
 .card-description > h1,
 .card-array .card-lg .card-large-name {
-	font-size:1vw
+	font-size:0.84vw
 }
 
 .deck-counter,
@@ -2094,7 +2102,7 @@ body,
 #toggle-music,
 #end-screen button,
 #notification-bar > div::after {
-	color:goldenrod
+	color:#FFB800
 }
 
 .links,

@@ -1917,6 +1917,7 @@ if (typeof window !== "undefined" && window.Website2APK && typeof window.Website
 			navigator.vibrate(150);   }
 
 		ui.toggleMusic_elem.classList.remove("music-customization");
+actualizarPosicionMusicaMovel();
 		var special_abilities = this.initPlayers(player_me, player_op);
 		await Promise.all([...Array(10).keys()].map(async () => {
 			await player_me.deck.draw(player_me.hand);
@@ -2097,6 +2098,7 @@ if (canVibrate) navigator.vibrate(1000);
 		player_me.reset();
 		player_op.reset();
 		ui.toggleMusic_elem.classList.add("music-customization");
+ actualizarPosicionMusicaMovel();
 		this.endScreen.classList.add("hide");
 		document.getElementById("deck-customization").classList.remove("hide");
 	}
@@ -2406,7 +2408,187 @@ class UI {
 		document.getElementById("click-background").addEventListener("click", () => ui.cancel(), false);
 		this.toggleMusic_elem = document.getElementById("toggle-music");
 		this.toggleMusic_elem.classList.add("fade");
+  				
+	if (isMobile && typeof isMobile === "function" && isMobile()) {
+
+
+			let deckCustomElement = document.getElementById("deck-customization");
+			if (deckCustomElement && deckCustomElement.style) {
+				deckCustomElement.style.transform = "translateY(-2.4vw)"; 
+
+
+let cardArrays = document.querySelectorAll(".card-array");
+				cardArrays.forEach(arrayBox => {
+					if (arrayBox) {
+						arrayBox.style.transform = "translateY(-1.8vw)";
+					}
+				});
+
+let cardLeaderMenu = document.getElementById("card-leader");
+				if (cardLeaderMenu) {
+					cardLeaderMenu.style.transform = "translateY(-1.0vw)";
+				}
+
+				let deckStatsBox = document.getElementById("deck-stats");
+				if (deckStatsBox) {
+					deckStatsBox.style.transform = "translateY(-2.9vw)";
+				}
+
+				let startGameBtn = document.getElementById("start-game");
+				if (startGameBtn) {
+					startGameBtn.style.transform = "translateY(-5.9vw)";
+				}
+
+				let startAIGameBtn = document.getElementById("start-ai-game");
+				if (startAIGameBtn) {
+					startAIGameBtn.style.display = "none";
+				}
 			}
+			
+			// --- DISPARO DE ARRANQUE INICIAL ---
+			// Forzamos la primera colocación al encender el juego
+			if (typeof actualizarPosicionMusicaMovel === "function") {
+				actualizarPosicionMusicaMovel();
+			}
+			
+			let leaderMe = document.getElementById("leader-me");
+			if (leaderMe) {
+				leaderMe.style.transform = "translateY(-4.5vw)"; 
+				leaderMe.style.transformOrigin = "bottom center";
+			}
+			
+			let statsMe = document.getElementById("stats-me");
+			if (statsMe) {
+				statsMe.style.transform = "translateY(-3.5vw)"; 
+			}
+			
+			let scoreTotalMe = document.getElementById("score-total-me");
+			if (scoreTotalMe) {
+				scoreTotalMe.style.transform = "translateY(3.5vw)"; 
+			}
+			
+			let passBtn = document.getElementById("pass-button");
+			if (passBtn) {
+				passBtn.style.transform = "translateY(-5.0vw)"; 
+			}
+			
+			let giveupBtn = document.getElementById("giveup-button");
+			if (giveupBtn) {
+				giveupBtn.style.transform = "translateY(-4.5vw)"; 
+			}
+
+			let weatherContainer = document.getElementById("weather");
+			if (weatherContainer) {
+				weatherContainer.style.transform = "translateY(-1.2vw)";
+			}
+
+			let fieldHand = document.getElementById("field-hand");
+			if (fieldHand) {
+				fieldHand.style.transform = "translateY(-2.7vw)"; 
+				fieldHand.style.zIndex = "80"; 
+			}
+			
+			let handRow = document.getElementById("hand-row");
+			if (handRow) {
+				handRow.style.transform = "scale(0.92) translateY(-1.5vw)";
+				handRow.style.transformOrigin = "bottom center";
+			}
+
+			let deckMe = document.getElementById("deck-me");
+			if (deckMe) {
+				deckMe.style.transform = "translateY(-4.2vw)"; 
+			}
+			
+			let graveMe = document.getElementById("grave-me");
+			if (graveMe) {
+				graveMe.style.transform = "translateY(-4.2vw)"; 
+			}
+
+			let boardElement = document.getElementById("board");
+			if (!boardElement) {
+				let mainTags = document.getElementsByTagName("main");
+				if (mainTags && mainTags.length > 0) {
+					boardElement = mainTags[0];
+				}
+			}
+			
+			if (boardElement) {
+				 
+				boardElement.style.backgroundImage = "url('images/board-mobile.jpg')";
+				boardElement.style.backgroundSize = "100% 100%";
+				boardElement.style.backgroundRepeat = "no-repeat";
+			}
+			let estiloQuotesMovel = document.createElement("style");
+			estiloQuotesMovel.innerHTML = `
+				.card-array .card-large-quote {
+					top: 82% !important;
+					font-size: 11px !important;
+					line-height: 0.9 !important;
+					transform: scale(0.53) !important;
+					transform-origin: top center !important;
+					width: 180% !important;
+					left: -40% !important;
+				}
+				.card-array .card-large-name {
+					top: 73.9% !important;
+					font-size: 13px !important;
+					line-height: 0.9 !important;
+					transform: scale(0.52) !important;
+					transform-origin: top center !important;
+					width: 180% !important;
+					left: -40% !important;
+				}
+				#card-leader .card-large-name {                                
+					top: 74.2% !important;				
+					font-size: 13px !important;
+					line-height: 1 !important;
+					transform: scale(0.52) !important;
+					transform-origin: top center !important;
+					width: 180% !important;
+					left: -40% !important;
+				}
+                               #carousel .card-large-name {
+					top: 74.2% !important;
+					font-size: 15px !important;
+					line-height: 0.9 !important;
+					transform: scale(0.58) !important;
+					transform-origin: top center !important;
+					width: 170% !important;
+					left: -35% !important;
+				}
+                                #carousel .card-large-quote {
+					top: 82% !important;
+				}
+				.card-preview .card-lg {
+					top: 4.5vw !important;
+				}
+				.card-preview .card-description {
+					top: 34.5vw !important;
+				}
+				#carousel .card-description {
+					top: 71% !important;
+font-size: 11px !important;
+					line-height: 0.9 !important;
+					transform: scale(0.88) !important;
+					transform-origin: top center !important;
+					}
+#button_start {
+       margin-top: -43px !important;
+}
+#end-screen button {
+    margin: 42.5% 1% 0;
+    }
+              
+			`;
+			document.head.appendChild(estiloQuotesMovel);
+			
+			if (typeof actualizarPosicionMusicaMovel === "function") {
+				actualizarPosicionMusicaMovel();
+			}
+
+		}
+}
+
 
 	passLoad() {
 		load_pass--;
@@ -4242,3 +4424,40 @@ function isMobile() {
 		return navigator.userAgentData.mobile;
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
+
+function actualizarPosicionMusicaMovel() {
+    if (isMobile && typeof isMobile === "function" && isMobile()) {
+        let musicToggle = document.getElementById("toggle-music");
+        if (musicToggle) {
+            if (musicToggle.classList.contains("music-customization")) {
+                musicToggle.style.transform = "translate(22.6vw, -3vw)";
+musicToggle.style.gap = "30px";
+                musicToggle.style.fontSize = "4.0vw";
+            } else {
+                musicToggle.style.transform = "translate(-23.5vw, -4.5vw)";
+musicToggle.style.gap = "15px";
+                musicToggle.style.fontSize = "4.1vw";
+            }
+        }
+    }
+}
+
+(function() {
+    if (typeof window !== "undefined") {
+        // Obligamos al navegador a mantener la escala de texto fija al 100%
+        if (window.chrome && window.chrome.webview) {
+            window.chrome.webview.postMessage({ type: "SET_TEXT_ZOOM", value: 100 });
+        }
+        
+        // Bloqueamos que Android intente estirar los rem/em mediante estilos computados
+        let estiloBlindaje = document.createElement("style");
+        estiloBlindaje.innerHTML = `
+            * {
+                -webkit-text-size-adjust: 100% !important;
+                -moz-text-size-adjust: 100% !important;
+                text-size-adjust: 100% !important;
+            }
+        `;
+        document.head.appendChild(estiloBlindaje);
+    }
+})();

@@ -6,10 +6,26 @@
 		<meta name = "author" content = "Sundaram, Costa, Sylver & Iván Mtz" />
 		<meta name = "description" content = "Play the original Gwent minigame from The Witcher 3 in your browser! Includes cards from Hearts of Stone and Blood & Wine!" />
 		<meta name = "keywords" content = "arun, sundaram, reynolds, costa, randompianist, sylver, romain, durban, programmer, gwent, tw3, witcher, card, game, gamedev, play" />
-		<meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 		<link rel = "icon" type = "image/x-icon" href = "images/favicon.ico" />
 		<link rel = "stylesheet" type = "text/css" href = "css/style.css" />
 		<style type = "text/css" id = "pLoad"></style>
+<script type="text/javascript">
+    (function() {
+        if (window.PhoneGap || window.cordova || navigator.userAgent.indexOf('Android') > -1) {
+            document.addEventListener('deviceready', function() {
+                if (navigator.app && navigator.app.overrideButton) {
+                    navigator.app.overrideButton("volumeup", true);
+                }
+            }, false);
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+            let chasisEstilo = document.createElement('style');
+            chasisEstilo.innerHTML = '* { -webkit-text-size-adjust: none !important; text-size-adjust: none !important; }';
+            document.head.appendChild(chasisEstilo);
+        });
+    })();
+</script>
 	
 <style type = "text/css">        
 @font-face {
@@ -289,9 +305,9 @@
 			<button id = "start-game" class = "start-game_class">Start game</button>
 			<button id = "start-ai-game" class = "start-game_class">Start AI game</button>
 		</section>
-		<div id="toggle-music" class="center music-customization" style="display:none; cursor:default !important; display: flex; gap: 8px; align-items: center;">
-    <span id="btn-play" style="cursor:pointer; font-size: 0.8em;">♫</span>
-    <span id="btn-skip" style="cursor:pointer; font-size: 0.6em;">⏭</span>
+		<div id="toggle-music" class="center music-customization" style="display: flex; gap: 8px; align-items: center;">
+    <span id="btn-play" style="font-size: 0.8em;">♫</span>
+    <span id="btn-skip" style="font-size: 0.6em;">⏭</span>
 </div>
 		
 		<script type = "text/javascript" language = "JavaScript" src = "javascript/cards.js"></script>
