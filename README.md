@@ -6,7 +6,8 @@ In addition to cloning the original game, various cards, factions, abilities, an
 This project is a modified version based on [RandomPianist's fork of Gwent Classic](https://github.com/RandomPianist/gwent-classic-v3.1).
 
 ## Screenshots
-<img width="48%" alt="gameplay 1" src="https://github.com/user-attachments/assets/7d6b0fb5-1501-422d-97a6-44e4649736b3" /> <img width="48%" alt="gameplay 2" " src="https://github.com/user-attachments/assets/cb966df1-dbd6-498e-8e1a-71313bc984ad"/>
+<img width="48%" alt="gameplay 1" src="https://github.com/user-attachments/assets/7d6b0fb5-1501-422d-97a6-44e4649736b3" /> <img width="48%" alt="gameplay 2" src="https://github.com/user-attachments/assets/51205a80-8a24-45d8-90e0-b0675185054c" />
+
 
 ## Improvements:
 
