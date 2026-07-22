@@ -373,6 +373,18 @@
     }
     window.addEventListener('click', iniciarAlTocar);
     window.addEventListener('touchstart', iniciarAlTocar);
+ document.addEventListener("visibilitychange", function() {
+        if (audio && audio.src && audio.src !== "") {
+            if (document.hidden) {
+                audio._fuePausadoPorSistema = !audio.paused;
+                audio.pause();
+            } else {
+                if (audio._fuePausadoPorSistema) {
+                    audio.play().catch(function(e) { console.log("Bloqueo de hardware evitado"); });
+                }
+            }
+        }
+    });
 </script>
 
 

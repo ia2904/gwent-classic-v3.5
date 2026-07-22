@@ -2444,9 +2444,7 @@ let cardLeaderMenu = document.getElementById("card-leader");
 					startAIGameBtn.style.display = "none";
 				}
 			}
-			
-			// --- DISPARO DE ARRANQUE INICIAL ---
-			// Forzamos la primera colocación al encender el juego
+						
 			if (typeof actualizarPosicionMusicaMovel === "function") {
 				actualizarPosicionMusicaMovel();
 			}
@@ -2579,6 +2577,28 @@ font-size: 11px !important;
     margin: 42.5% 1% 0;
     }
               
+html, body, #click-background {
+	overflow: hidden !important;
+ }
+
+#field-me {
+	top: -3.3% !important;
+}
+
+#field-op {
+	top: -1.5% !important;
+	transform: none !important;
+}
+
+#f5 {
+	transform: translateY(-0.25vw) !important;
+}
+
+
+#f6 {
+	transform: translateY(-0.5vw) !important;
+}
+
 			`;
 			document.head.appendChild(estiloQuotesMovel);
 			
@@ -3341,8 +3361,30 @@ class DeckMaker {
 		document.getElementById("select-op-deck").addEventListener("click", () => this.selectOPDeck(), false);
 		document.getElementById("download-deck").addEventListener("click", () => this.downloadDeck(), false);
 		document.getElementById("add-file").addEventListener("change", () => this.uploadDeck(), false);
-		document.getElementById("start-game").addEventListener("click", () => this.startNewGame(false), false);
-		document.getElementById("start-ai-game").addEventListener("click", () => this.startNewGame(true), false);
+
+        const actualizartituloporid = () => {
+            let elemTituloFaccion = document.getElementById("faction-title");
+            if (elemTituloFaccion) {
+                this.me_deck_title = elemTituloFaccion.innerText || elemTituloFaccion.textContent || "Northern Realms";
+            } else {
+                this.me_deck_title = "Northern Realms";
+            }
+                  
+            if (ui && ui.player1Deck) { ui.player1Deck.title = this.me_deck_title; }
+            ui.player1DeckTitle = this.me_deck_title;
+        };
+
+        document.getElementById("start-game").addEventListener("click", () => { 
+            actualizartituloporid(); 
+            this.startNewGame(false); 
+        }, false);
+
+        document.getElementById("start-ai-game").addEventListener("click", () => { 
+            actualizartituloporid(); 
+            this.startNewGame(true); 
+        }, false);
+
+
 		window.addEventListener("keydown", function (e) {
 			if (document.getElementById("deck-customization").className.indexOf("hide") == -1) {
 				switch(e.keyCode) {
@@ -4443,13 +4485,11 @@ musicToggle.style.gap = "15px";
 }
 
 (function() {
-    if (typeof window !== "undefined") {
-        // Obligamos al navegador a mantener la escala de texto fija al 100%
+    if (typeof window !== "undefined") {       
         if (window.chrome && window.chrome.webview) {
             window.chrome.webview.postMessage({ type: "SET_TEXT_ZOOM", value: 100 });
         }
-        
-        // Bloqueamos que Android intente estirar los rem/em mediante estilos computados
+     
         let estiloBlindaje = document.createElement("style");
         estiloBlindaje.innerHTML = `
             * {
@@ -4461,3 +4501,4 @@ musicToggle.style.gap = "15px";
         document.head.appendChild(estiloBlindaje);
     }
 })();
+
