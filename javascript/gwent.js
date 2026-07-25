@@ -3696,10 +3696,7 @@ class DeckMaker {
 					"<p>" +
 						"<b>Leader ability:</b> " +
 						ability_dict[card_dict[deck["leader"]]["ability"]].description + 
-					"</p>" +
-					"<p>" +
-						"<b>Deck description:</b> " +
-						deck["description"],
+					"</p>", /* <p><b>Deck description:</b> " + deck["description"], */
 				faction: deck["faction"]
 			};
 		});
@@ -3739,10 +3736,7 @@ class DeckMaker {
 					"<p>" +
 						"<b>Leader ability:</b> " +
 						ability_dict[card_dict[deck["leader"]]["ability"]].description + 
-					"</p>" +
-					"<p>" +
-						"<b>Deck description:</b> " +
-						deck["description"],
+					"</p>", /* <p><b>Deck description:</b> " + deck["description"], */
 				faction: deck["faction"]
 			};
 		}));
