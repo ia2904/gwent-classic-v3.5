@@ -222,7 +222,10 @@ var ability_dict = {
 		description: "Pick an Impenetrable Fog card from your deck and play it instantly.",
 		activated: async card => {
 			let out = card.holder.deck.findCard(c => c.name === "Impenetrable Fog");
-			if (out) await out.autoplay(card.holder.deck);
+			if (out) {  
+tocar("leader", false);
+await out.autoplay(card.holder.deck);
+}
 		},
 		weight: (card, ai) => ai.weightWeatherFromDeck(card, "fog")
 	},
@@ -246,7 +249,7 @@ var ability_dict = {
 			}, 2000);
 
 			
-			tocar("clear", false);
+			tocar("leader", false);
 			await sleep(500);
 			await weather.clearWeather()
 		},
@@ -255,24 +258,36 @@ var ability_dict = {
 
 	foltest_siegemaster: {
 		description: "Doubles the strength of all your Siege units (unless a Commander's Horn is also present on that row).",
-		activated: async card => await board.getRow(card, "siege", card.holder).leaderHorn(card),
+		activated: async card => { 
+tocar("leader", false);
+await board.getRow(card, "siege", card.holder).leaderHorn(card);
+},
 		weight: (card, ai) => ai.weightHornRow(card, board.getRow(card, "siege", card.holder))
 	},
 	foltest_steelforged: {
 		description: "Destroy your enemy's strongest Siege unit(s) if the combined strength of all his or her Siege units is 10 or more.",
-		activated: async card => await ability_dict["scorch_s"].placed(card),
+		activated: async card => {
+ tocar("leader", false);
+await ability_dict["scorch_s"].placed(card);
+},
 		weight: (card, ai, max) => ai.weightScorchRow(card, max, "siege")
 	},
 	foltest_son: {
 		description: "Destroy your enemy's strongest Ranged Combat unit(s) if the combined strength of all his or her Ranged Combat units is 10 or more.",
-		activated: async card => await ability_dict["scorch_r"].placed(card),
+		activated: async card => { 
+ tocar("leader", false);
+await ability_dict["scorch_r"].placed(card);
+},
 		weight: (card, ai, max) => ai.weightScorchRow(card, max, "ranged")
 	},
 	emhyr_imperial: {
 		description: "Pick a Torrential Rain card from your deck and play it instantly.",
 		activated: async card => {
 			let out = card.holder.deck.findCard(c => c.name === "Torrential Rain");
-			if (out) await out.autoplay(card.holder.deck);
+			if (out) {
+ tocar("leader", false);
+ await out.autoplay(card.holder.deck);
+}
 		},
 		weight: (card, ai) => ai.weightWeatherFromDeck(card, "rain")
 	},
@@ -285,6 +300,7 @@ var ability_dict = {
 			try {
 				Carousel.curr.cancel();
 			} catch (err) {}
+ tocar("leader", false);
 			await ui.viewCardsInContainer(container);
 		},
 		weight: card => {
@@ -303,6 +319,7 @@ var ability_dict = {
 			if (card.holder.controller instanceof ControllerAI) {
 				let newCard = card.holder.controller.medic(card, grave);
 				newCard.holder = card.holder;
+            tocar("leader", false);
 				await board.toHand(newCard, grave);
 				return;
 			}
@@ -312,6 +329,7 @@ var ability_dict = {
 			await ui.queueCarousel(grave, 1, (c,i) => {
 				let newCard = c.cards[i];
 				newCard.holder = card.holder;
+            tocar("leader", false);
 				board.toHand(newCard, grave);
 			}, c => c.isUnit(), true);
 		},
@@ -323,7 +341,10 @@ var ability_dict = {
 	},
 	eredin_commander: {
 		description: "Double the strength of all your Close Combat units (unless a Commander's horn is 	also present on that row).",
-		activated: async card => await board.getRow(card, "close", card.holder).leaderHorn(card),
+		activated: async card => {
+            tocar("leader", false);
+await board.getRow(card, "close", card.holder).leaderHorn(card);
+},
 		weight: (card, ai) => ai.weightHornRow(card, board.getRow(card, "close", card.holder))
 	},
 	eredin_bringer_of_death: {
@@ -338,13 +359,17 @@ var ability_dict = {
 				} catch (err) {}
 				await ui.queueCarousel(card.holder.grave, 1, (c,i) => newCard = c.cards[i], c => c.isUnit(), false, false);
 			}
-			if (newCard) await board.toHand(newCard, card.holder.grave);
+			if (newCard) {
+            tocar("leader", false);
+await board.toHand(newCard, card.holder.grave);
+}
 		},
 		weight: (card, ai, max, data) => ai.weightMedic(data, 0, card.holder)
 	},
 	eredin_destroyer: {
 		description: "Discard 2 cards and draw 1 card of your choice from your deck.",
 		activated: async (card) => {
+            tocar("leader", false);
 			let hand = board.getRow(card, "hand", card.holder);
 			let deck = board.getRow(card, "deck", card.holder);
 			if (!(card.holder.controller instanceof ControllerAI)) {
@@ -375,6 +400,7 @@ if (card.holder.controller instanceof ControllerAI) {
 	eredin_king: {
 		description: "Pick any weather card from your deck and play it instantly.",
 		activated: async card => {
+            tocar("leader", false);
 			let deck = board.getRow(card, "deck", card.holder);
 			if (card.holder.controller instanceof ControllerAI) await ability_dict["eredin_king"].helper(card).card.autoplay(card.holder.deck);
 			else {
@@ -407,18 +433,25 @@ if (card.holder.controller instanceof ControllerAI) {
 	},
 	francesca_queen: {
 		description: "Destroy your enemy's strongest Close Combat unit(s) if the combined strength of all his or her Close Combat units is 10 or more.",
-		activated: async card => await ability_dict["scorch_c"].placed(card),
+		activated: async card => { 
+        tocar("leader", false);
+await ability_dict["scorch_c"].placed(card);
+},
 		weight: (card, ai, max) => ai.weightScorchRow(card, max, "close")
 	},
 	francesca_beautiful: {
 		description: "Doubles the strength of all your Ranged Combat units (unless a Commander's Horn is also present on that row).",
-		activated: async card => await board.getRow(card, "ranged", card.holder).leaderHorn(card),
+		activated: async card => { 
+        tocar("leader", false);
+await board.getRow(card, "ranged", card.holder).leaderHorn(card);
+},
 		weight: (card, ai) => ai.weightHornRow(card, board.getRow(card, "ranged", card.holder))
 	},
 	francesca_daisy: {
 		description: "Draw an extra card at the beginning of the battle.",
 		placed: card => game.gameStart.push(() => {
 			let draw = card.holder.deck.removeCard(0);
+        tocar("leader", false);
 			card.holder.hand.addCard(draw);
 			return true;
 		})
@@ -427,7 +460,10 @@ if (card.holder.controller instanceof ControllerAI) {
 		description: "Pick a Biting Frost card from your deck and play it instantly.",
 		activated: async card => {
 			let out = card.holder.deck.findCard(c => c.name === "Biting Frost");
-			if (out) await out.autoplay(card.holder.deck);
+			if (out) {
+            tocar("leader", false);
+ await out.autoplay(card.holder.deck);
+}
 		},
 		weight: (card, ai) => ai.weightWeatherFromDeck(card, "frost")
 	},
@@ -437,6 +473,7 @@ if (card.holder.controller instanceof ControllerAI) {
 			let close = board.getRow(card, "close");
 			let ranged =  board.getRow(card, "ranged");
 			let cards = ability_dict["francesca_hope"].helper(card);
+            tocar("leader", false);
 			await Promise.all(cards.map(async p => await board.moveTo(p.card, p.row === close ? ranged : close, p.row)));
 		},
 		weight: card => {
@@ -462,6 +499,7 @@ if (card.holder.controller instanceof ControllerAI) {
 	crach_an_craite: {
 		description: "Shuffle all cards from each player's graveyard back into their decks.",
 		activated: async card => {
+        tocar("leader", false);
 			Promise.all(card.holder.grave.cards.map(c => board.toDeck(c, card.holder.grave)));
 			await Promise.all(card.holder.opponent().grave.cards.map(c => board.toDeck(c, card.holder.opponent().grave)));
 		},
@@ -495,7 +533,10 @@ if (card.holder.controller instanceof ControllerAI) {
 			else await ui.queueCarousel(board.getRow(card, "hand", card.holder), 1, (c, i) => wrapper.card = c.cards[i], c => c.isUnit(), true);
 			wrapper.card.autoplay();
 			card.holder.hand.removeCard(wrapper.card);
-			if (card.holder.deck.cards.length > 0) await card.holder.deck.draw(card.holder.hand);
+			if (card.holder.deck.cards.length > 0) {
+            tocar("leader", false);
+await card.holder.deck.draw(card.holder.hand);
+}
 		},
 		weight: (card, ai) => {
 			let units = card.holder.hand.cards.filter(c => c.isUnit());
@@ -517,6 +558,7 @@ if (card.holder.controller instanceof ControllerAI) {
 				} catch (err) {}
 				await ui.queueCarousel(hand, 1, (c, i) => board.toGrave(c.cards[i], c), () => true);
 			}
+        tocar("leader", false);
 			for (let i = 0; i < 2; i++) {
 				if (card.holder.deck.cards.length > 0) await card.holder.deck.draw(card.holder.hand);
 			}
@@ -529,6 +571,7 @@ if (card.holder.controller instanceof ControllerAI) {
 	radovid_stern: {
 		description: "Discard 2 cards and draw 1 card of your choice from your deck.",
 		activated: async (card) => {
+            tocar("leader", false);
 			let hand = board.getRow(card, "hand", card.holder);
 			let deck = board.getRow(card, "deck", card.holder);
 			
@@ -577,7 +620,10 @@ if (card.holder.controller instanceof ControllerAI) {
 	},
 	cosimo_malaspina: {
 		description: "Destroy your enemy's strongest Melee unit(s) if the combined strength of all his or her Melee units is 10 or more.",
-		activated: async card => await ability_dict["scorch_c"].placed(card),
+		activated: async card => {
+        tocar("leader", false);
+ await ability_dict["scorch_c"].placed(card);
+},
 		weight: (card, ai, max) => ai.weightScorchRow(card, max, "close")
 	},
 	resilience: {
@@ -743,8 +789,11 @@ if (card.holder.controller instanceof ControllerAI) {
 			player.endTurnAfterAbilityUse = false;
 			ui.showPreviewVisuals(card);
 			ui.enablePlayer(true);
-			if(!(player.controller instanceof ControllerAI)) ui.setSelectable(card, true);
-		},
+			if(!(player.controller instanceof ControllerAI)) {
+ ui.setSelectable(card, true);
+		}
+        tocar("leader", false);
+},
 		target: "wu_koshchey",
 		weight: (card, ai, max) => {
 			if (ai.player.getAllRowCards().filter(c => c.isUnit()).length === 0) return 0;
@@ -769,7 +818,7 @@ let cineOverlay = document.createElement("div");
 				if (cineOverlay) cineOverlay.remove();
 			}, 2000);
 
-			tocar("clear", false);
+			tocar("leader", false);
 			await weather.clearWeather()
 		},
 		weight: (card, ai) => ai.weightCard(card_dict["spe_clear"])
@@ -780,7 +829,10 @@ let cineOverlay = document.createElement("div");
 			player.endTurnAfterAbilityUse = false;
 			ui.showPreviewVisuals(card);
 			ui.enablePlayer(true);
-			if (!(player.controller instanceof ControllerAI)) ui.setSelectable(card, true);
+			if (!(player.controller instanceof ControllerAI)) {
+ui.setSelectable(card, true);
+}
+        tocar("leader", false);
 		},
 		weight: (card, ai) => {
 			let horns = card.holder.opponent().getAllRows().filter(r => r.special.findCards(c => c.abilities.includes("horn")).length > 0).sort((a, b) => b.total - a.total);
@@ -804,7 +856,10 @@ let cineOverlay = document.createElement("div");
 				} catch (err) {}
 				await ui.queueCarousel(card.holder.grave, 1, (c, i) => newCard = c.cards[i], c => c.isUnit(), false, false);
 			}
-			if (newCard) await newCard.autoplay(card.holder.grave);
+			if (newCard) {
+            tocar("leader", false);
+await newCard.autoplay(card.holder.grave);
+}
 		},
 		weight: (card, ai, max, data) => ai.weightMedic(data, 0, card.holder)
 	},
@@ -826,7 +881,10 @@ let cineOverlay = document.createElement("div");
 			player.endTurnAfterAbilityUse = false;
 			ui.showPreviewVisuals(card);
 			ui.enablePlayer(true);
-			if (!(player.controller instanceof ControllerAI)) ui.setSelectable(card, true);
+			if (!(player.controller instanceof ControllerAI)) {
+ui.setSelectable(card, true);
+}
+        tocar("leader", false);
 		},
 		weight: (card, ai, max) => {
 			return Math.max(ai.weightScorchRow(card, max, "close"), ai.weightScorchRow(card, max, "ranged"), ai.weightScorchRow(card, max, "siege"));
@@ -857,7 +915,10 @@ let cineOverlay = document.createElement("div");
 			player.endTurnAfterAbilityUse = false;
 			ui.showPreviewVisuals(card);
 			ui.enablePlayer(true);
-			if (!(player.controller instanceof ControllerAI)) ui.setSelectable(card, true);
+			if (!(player.controller instanceof ControllerAI)) {
+ui.setSelectable(card, true);
+}
+        tocar("leader", false);
 		},
 		weight: (card, ai, max) => {
 			return Math.max(ai.weightScorchRow(card, max, "close"), ai.weightScorchRow(card, max, "ranged"), ai.weightScorchRow(card, max, "siege"));
@@ -868,6 +929,7 @@ let cineOverlay = document.createElement("div");
 		activated: async (card, player) => {
 			let op_spies = card.holder.opponent().getAllRowCards().filter(c => c.isUnit() && c.abilities.includes("spy"));
 			let me_spies = card.holder.getAllRowCards().filter(c => c.isUnit() && c.abilities.includes("spy"));
+        tocar("leader", false);
 			await op_spies.map(async c => await board.toGrave(c, c.currentLocation));
 			await me_spies.map(async c => await board.toGrave(c, c.currentLocation));
 		},
@@ -885,6 +947,7 @@ let cineOverlay = document.createElement("div");
 			if (opCloseRow.isShielded()) return;
 			let units = opCloseRow.minUnits();
 			if (units.length === 0) return;
+        tocar("leader", false);
 			await Promise.all(units.map(async c => await c.animate("seize")));
 			units.forEach(async c => {
 				c.holder = card.holder;
@@ -900,6 +963,7 @@ let cineOverlay = document.createElement("div");
 		description: "Summon Flyndr's Crew",
 		activated: async (card, player) => {
 			let new_card = new Card("sy_flyndr_crew", card_dict["sy_flyndr_crew"], player);
+        tocar("leader", false);
 			await board.addCardToRow(new_card, new_card.row, card.holder);
 		},
 		weight: (card, ai, max) => {
@@ -912,7 +976,10 @@ let cineOverlay = document.createElement("div");
 			player.endTurnAfterAbilityUse = false;
 			ui.showPreviewVisuals(card);
 			ui.enablePlayer(true);
-			if (!(player.controller instanceof ControllerAI)) ui.setSelectable(card, true);
+			if (!(player.controller instanceof ControllerAI)) {
+ ui.setSelectable(card, true);
+}
+        tocar("leader", false);
 		},
 		weight: (card) => 20
 	},
@@ -922,7 +989,8 @@ let cineOverlay = document.createElement("div");
 			let heroes = player.opponent().getAllRowCards().filter(c => c.hero);
 			if (heroes.length === 0) return;
 			let target = heroes.sort((a, b) => a.power - b.power)[0];
-			await target.animate("scorch", true, false);
+        tocar("leader", false);			
+await target.animate("scorch", true, false);
 			await board.toGrave(target, target.currentLocation);
 		},
 		weight: (card, ai, max) => {
@@ -958,6 +1026,7 @@ let cineOverlay = document.createElement("div");
 	baal_zebuth: {
 		description: "Select 2 cards from your opponent's discard pile and shuffle them back into his/her deck.",
 		activated: async (card) => {
+            tocar("leader", false);
 			let grave = card.holder.opponent().grave;
 			if (card.holder.controller instanceof ControllerAI) {
 				let cards = grave.findCardsRandom(false,2);
@@ -981,6 +1050,7 @@ let cineOverlay = document.createElement("div");
 			if (card.holder.grave.cards.length === 0) return;
 			let grave = card.holder.grave;
 			let c = grave.findCardsRandom(false, 1)[0];
+        tocar("leader", false);
 			await board.toHand(c, c.holder.grave);
 			Promise.all(card.holder.grave.cards.map(c => board.toDeck(c, card.holder.grave)));
 		},
