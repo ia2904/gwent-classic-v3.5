@@ -1,5 +1,28 @@
 "use strict"
 
+
+let vibrationEnabled = true;
+
+const _originalNavigatorVibrate = navigator.vibrate ? navigator.vibrate.bind(navigator) : null;
+const _originalWebsite2APKVibrate = (window.Website2APK && window.Website2APK.vibrate)
+    ? window.Website2APK.vibrate.bind(window.Website2APK)
+    : null;
+
+if (_originalNavigatorVibrate) {
+    navigator.vibrate = function(pattern) {
+        if (!vibrationEnabled) return false; 
+        return _originalNavigatorVibrate(pattern);
+    };
+}
+
+if (_originalWebsite2APKVibrate) {
+    window.Website2APK.vibrate = function(pattern) {
+        if (!vibrationEnabled) return false; 
+        return _originalWebsite2APKVibrate(pattern);
+    };
+}
+
+
 class Controller {}
 
 class ControllerAI {
@@ -1933,6 +1956,7 @@ actualizarPosicionMusicaMovel();
 
 	async coinToss() {
 		this.firstPlayer = (Math.random() < 0.5) ? player_me : player_op;
+tocar("coin", false);
 		await ui.notification(this.firstPlayer.tag + "-coin", 1200);
 		return this.firstPlayer;
 	}
@@ -3422,6 +3446,27 @@ document.getElementById("board-preview").addEventListener("click", () => {
     document.querySelector("main").style.backgroundImage = `url(images/Boards/${b.file})`;
 
 document.getElementById("board-carousel").style.display = "none";
+});
+
+
+
+const isMobileDeviceForVibration = /Mobi|Android/i.test(navigator.userAgent);
+
+const toggleBtn = document.getElementById("toggle-vibration");
+
+if (!isMobileDeviceForVibration) {
+    toggleBtn.style.display = "none";
+}
+document.getElementById("toggle-vibration").addEventListener("click", () => {
+    vibrationEnabled = !vibrationEnabled;
+    const icon = document.getElementById("vibration-icon");
+    if (vibrationEnabled) {
+        icon.src = "images/icons/vibration-on.png";
+        icon.alt = "Vibration ON";
+    } else {
+        icon.src = "images/icons/vibration-off.png";
+        icon.alt = "Vibration OFF";
+    }
 });
 
 

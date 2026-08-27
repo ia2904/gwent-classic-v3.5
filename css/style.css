@@ -1081,6 +1081,17 @@ background-size: cover;
 }
 
 
+#toggle-vibration {
+    left: 79%;
+top: 12.2%;
+   }
+
+#toggle-vibration img {
+    width: 27px;   
+    height: 27px;
+}
+
+
 #select-board {
     left: 22%;
 }
@@ -1106,7 +1117,7 @@ background-size: cover;
 }
 
 #op-deck-name {
-	left:72%;
+	left:72.3%;
 	font-style:italic
 }
 
