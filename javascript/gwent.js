@@ -2624,6 +2624,10 @@ html, body, #click-background {
 	transform: translateY(-0.5vw) !important;
 }
 
+#very_start {
+	transform: translate(-28px, 20px) !important;
+}
+
 			`;
 			document.head.appendChild(estiloQuotesMovel);
 			
@@ -3637,6 +3641,42 @@ document.getElementById("save-internal-deck").addEventListener("click", () => th
 		window.addEventListener("keydown", function (e) {
 			if (e.keyCode == 13 && carta_selecionada !== null) carta_selecionada();
 		});
+
+
+        let touchTimeout = null;
+        let touchMoved = false;
+
+        elem.addEventListener("touchstart", (e) => {
+            touchMoved = false;
+            if (touchTimeout) clearTimeout(touchTimeout);
+
+            touchTimeout = setTimeout(async () => {
+                if (!touchMoved) {
+                    if (typeof tocar === "function") tocar("explaining", false);
+                    let container = new CardContainer();
+                    container.cards = [new Card(index, card_data, null)];
+                    try {
+                        Carousel.curr.cancel();
+                    } catch (err) { }
+                    await ui.viewCardsInContainer(container);
+                }
+            }, 600); 
+        }, { passive: true });
+
+        elem.addEventListener("touchmove", () => {
+            touchMoved = true;
+            if (touchTimeout) clearTimeout(touchTimeout);
+        }, { passive: true });
+
+        elem.addEventListener("touchend", () => {
+            if (touchTimeout) clearTimeout(touchTimeout);
+        }, { passive: true });
+
+        elem.addEventListener("touchcancel", () => {
+            if (touchTimeout) clearTimeout(touchTimeout);
+        }, { passive: true });
+
+
 		elem.addEventListener('contextmenu', async (e) => {
 			e.preventDefault();
 			let container = new CardContainer();

@@ -280,7 +280,7 @@ div.abs {
     justify-content: center;
     text-align: center;
     border: none;     
-    transform: translate(-70px, 72px); 
+    transform: translate(-75px, 72px); 
 }
 
 #very_start_bg1 {
@@ -1181,7 +1181,7 @@ display: flex;
 }
 
 #download-deck {
-	left:18.8%
+	left:18.2%
 }
 
 #select-op-deck {
@@ -2396,7 +2396,19 @@ body,
     transition: all 0.1s ease-in-out;
 }
 
-/* --- ANIMACIÓN CINEMÁTICA: CLEAR WEATHER (RAYOS DE SOL) --- */
+
+.card-lg, 
+.card-lg *,
+#board-preview,
+#internal-deck-popup {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
+
+
 
 .sunlight-overlay-cinema {
     position: fixed !important;
