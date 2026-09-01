@@ -82,8 +82,8 @@ menu .pure-menu ul,
 }
 
 body {
-	color:#555;
-	background-color:#ccc
+	color:aliceblue;
+	background-color:black
 }
 
 .pure-img-responsive {
@@ -109,8 +109,8 @@ body {
 .header {
 	padding:2.5em 2em 0;
 	border-bottom:1px solid #444;
-	background-color:#bbb;
-	color:#333;
+	background-color:maroon;
+	color:aliceblue;
 	text-align:center
 }
 
@@ -122,12 +122,12 @@ body {
 .header h2 {
 	padding:0;
 	margin-top:0;
-	color:#444
+	color:navajowhite
 }
 
 .content-subhead {
 	margin:50px 0 20px 0;
-	color:#666
+	color:goldenrod
 }
 
 .content h2 {
@@ -147,13 +147,13 @@ body {
 	z-index:1000;
 	width:150px;
 	margin-left:-150px;
-	background:#191818;
+	background:black;
 	overflow-y:auto
 }
 
 #menu a {
 	padding:.6em 0 .6em .6em;
-	color:#999
+	color:aliceblue
 }
 
 #menu .pure-menu,
